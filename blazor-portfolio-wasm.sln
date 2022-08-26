@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazor-portfolio-wasm", "blazor-portfolio-wasm\blazor-portfolio-wasm.csproj", "{12D24E50-55B7-4B10-AC7E-FBA41E377D25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blazor-portfolio-wasm", "blazor-portfolio-wasm\blazor-portfolio-wasm.csproj", "{12D24E50-55B7-4B10-AC7E-FBA41E377D25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
