@@ -41,7 +41,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@master
       with:
-        name: blazor-profile-wasm
+        name: blazorStaticSite
  
     - name: Deploy to S3 🚀
       uses: jakejarvis/s3-sync-action@master
