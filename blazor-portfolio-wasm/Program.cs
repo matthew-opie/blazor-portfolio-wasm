@@ -1,3 +1,5 @@
+// Copyright 2022 Matthew Opie (mattopie.com, matthewopie.com) All Rights Reserved.
+
 using blazor_portfolio_wasm;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
