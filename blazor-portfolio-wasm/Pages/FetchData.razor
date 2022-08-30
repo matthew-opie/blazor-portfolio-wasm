@@ -1,6 +1,9 @@
 ﻿@page "/weather"
 @inject HttpClient Http
-@using System.Text.Json;
+@using Newtonsoft.Json
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using System.Globalization
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -14,88 +17,161 @@
 }
 else
 {
-    <p>@data.ToString()</p>
+    <p><table>
+        <tr>
+            <th>
+                @forecast
+            </th>
+        </tr>
+    </table></p>
 }
 
 @code {
-    private JsonElement data;
+    private string data;
     private WeatherForecast? forecast;
-    private HourlyUnits hourlyUnits;
-    private HourlyData hourlyData;
 
     protected override async Task OnInitializedAsync()
     {
         var weatherUrl = @"https://api.open-meteo.com/v1/forecast?latitude=44.5947&longitude=-68.8532&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=3";
 
-        data = await Http.GetFromJsonAsync<JsonElement>(weatherUrl);
+        data = await Http.GetStringAsync(weatherUrl);
 
-        forecast = new WeatherForecast()
-            {
-                Latitude = data.GetProperty("latitude").GetDouble(),
-                Longitude = data.GetProperty("longitude").GetDouble(),
-                GenerationTime = data.GetProperty("generationtime_ms").GetDecimal(),
-                UtcOffsetSeconds = data.GetProperty("utc_offset_seconds").GetInt32(),
-                TimeZone = data.GetProperty("timezone").GetString(),
-                TimeZoneAbbreviation = data.GetProperty("timezone_abbreviation").GetString(),
-                Elevation = data.GetProperty("elevation").GetDouble()
-            };
+        forecast = JsonConvert.DeserializeObject<WeatherForecast>(data);
+    }
+
+
+    // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
+    public class Daily
+    {
+        [JsonPropertyName("time")]
+        public List<string> Time;
+
+        [JsonPropertyName("weathercode")]
+        public List<double> Weathercode;
+
+        [JsonPropertyName("temperature_2m_max")]
+        public List<double> Temperature2mMax;
+
+        [JsonPropertyName("temperature_2m_min")]
+        public List<double> Temperature2mMin;
+
+        [JsonPropertyName("sunrise")]
+        public List<string> Sunrise;
+
+        [JsonPropertyName("sunset")]
+        public List<string> Sunset;
+
+        [JsonPropertyName("precipitation_sum")]
+        public List<double> PrecipitationSum;
+
+        [JsonPropertyName("precipitation_hours")]
+        public List<int> PrecipitationHours;
+    }
+
+    public class DailyUnits
+    {
+        [JsonPropertyName("time")]
+        public string Time;
+
+        [JsonPropertyName("weathercode")]
+        public string Weathercode;
+
+        [JsonPropertyName("temperature_2m_max")]
+        public string Temperature2mMax;
+
+        [JsonPropertyName("temperature_2m_min")]
+        public string Temperature2mMin;
+
+        [JsonPropertyName("sunrise")]
+        public string Sunrise;
+
+        [JsonPropertyName("sunset")]
+        public string Sunset;
+
+        [JsonPropertyName("precipitation_sum")]
+        public string PrecipitationSum;
+
+        [JsonPropertyName("precipitation_hours")]
+        public string PrecipitationHours;
+    }
+
+    public class Hourly
+    {
+        [JsonPropertyName("time")]
+        public List<DateTime> Time;
+
+        [JsonPropertyName("temperature_2m")]
+        public List<int> Temperature2m;
+
+        [JsonPropertyName("relativehumidity_2m")]
+        public List<int> Relativehumidity2m;
+
+        [JsonPropertyName("apparent_temperature")]
+        public List<int> ApparentTemperature;
+
+        [JsonPropertyName("precipitation")]
+        public List<double> Precipitation;
+
+        [JsonPropertyName("weathercode")]
+        public List<double> Weathercode;
+    }
+
+    public class HourlyUnits
+    {
+        [JsonPropertyName("time")]
+        public string Time;
+
+        [JsonPropertyName("temperature_2m")]
+        public string Temperature2m;
+
+        [JsonPropertyName("relativehumidity_2m")]
+        public string Relativehumidity2m;
+
+        [JsonPropertyName("apparent_temperature")]
+        public string ApparentTemperature;
+
+        [JsonPropertyName("precipitation")]
+        public string Precipitation;
+
+        [JsonPropertyName("weathercode")]
+        public string Weathercode;
     }
 
     public class WeatherForecast
     {
+        [JsonPropertyName("latitude")]
         public double Latitude;
 
+        [JsonPropertyName("longitude")]
         public double Longitude;
 
-        public decimal GenerationTime;
+        [JsonPropertyName("generationtime_ms")]
+        public decimal GenerationtimeMs;
 
+        [JsonPropertyName("utc_offset_seconds")]
         public int UtcOffsetSeconds;
 
-        public string? TimeZone;
+        [JsonPropertyName("timezone")]
+        public string Timezone;
 
-        public string? TimeZoneAbbreviation;
+        [JsonPropertyName("timezone_abbreviation")]
+        public string TimezoneAbbreviation;
 
+        [JsonPropertyName("elevation")]
         public double Elevation;
+
+        [JsonPropertyName("hourly_units")]
+        public HourlyUnits HourlyUnits;
+
+        [JsonPropertyName("hourly")]
+        public Hourly Hourly;
+
+        [JsonPropertyName("daily_units")]
+        public DailyUnits DailyUnits;
+
+        [JsonPropertyName("daily")]
+        public Daily Daily;
     }
 
-    public class HourlyUnits {
-        public string? Time;
-        public string? Temperature_2m;
-        public string? RelativeHumidity_2m;
-        public string? Apparent_Temperature;
-        public string? Precipitation;
-        public string? WeatherCode;
-    }
-    
-    public class HourlyData {
-        public string[]? Time;
-        public float[]? Temperature_2m;
-        public int[]? RelativeHumidity_2m;
-        public float[]? Apparent_Temperature;
-        public double[]? Precipitation;
-        public int[]? WeatherCode;
-    }
-    
-    public class DailyUnits {
-        public string? Time;
-        public string? WeatherCode;
-        public string? Temperature_2m_Max;
-        public string? Temperature_2m_Min;
-        public string? Sunrise;
-        public string? Sunset;
-        public string? Precipitation_Sum;
-        public string? Precipitation_Hours;
-    }
-    
-    public class DailyData
-    {
-        public string[]? Time;
-        public int[]? WeatherCode;
-        public float[]? Temperature_2m_Max;
-        public float[]? Temperature_2m_Min;
-        public string[]? Sunrise;
-        public string[]? Sunset;
-        public double[]? Precipitation_Sum;
-        public double[]? Precipitation_Hours;
-    }
+
 }
