@@ -1,5 +1,6 @@
 ﻿@page "/weather"
 @inject HttpClient Http
+@using System.Text.Json;
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -7,51 +8,94 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (forecast == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <p>@data.ToString()</p>
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private JsonElement data;
+    private WeatherForecast? forecast;
+    private HourlyUnits hourlyUnits;
+    private HourlyData hourlyData;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        var weatherUrl = @"https://api.open-meteo.com/v1/forecast?latitude=44.5947&longitude=-68.8532&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=3";
+
+        data = await Http.GetFromJsonAsync<JsonElement>(weatherUrl);
+
+        forecast = new WeatherForecast()
+            {
+                Latitude = data.GetProperty("latitude").GetDouble(),
+                Longitude = data.GetProperty("longitude").GetDouble(),
+                GenerationTime = data.GetProperty("generationtime_ms").GetDecimal(),
+                UtcOffsetSeconds = data.GetProperty("utc_offset_seconds").GetInt32(),
+                TimeZone = data.GetProperty("timezone").GetString(),
+                TimeZoneAbbreviation = data.GetProperty("timezone_abbreviation").GetString(),
+                Elevation = data.GetProperty("elevation").GetDouble()
+            };
     }
 
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
+        public double Latitude;
 
-        public int TemperatureC { get; set; }
+        public double Longitude;
 
-        public string? Summary { get; set; }
+        public decimal GenerationTime;
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public int UtcOffsetSeconds;
+
+        public string? TimeZone;
+
+        public string? TimeZoneAbbreviation;
+
+        public double Elevation;
+    }
+
+    public class HourlyUnits {
+        public string? Time;
+        public string? Temperature_2m;
+        public string? RelativeHumidity_2m;
+        public string? Apparent_Temperature;
+        public string? Precipitation;
+        public string? WeatherCode;
+    }
+    
+    public class HourlyData {
+        public string[]? Time;
+        public float[]? Temperature_2m;
+        public int[]? RelativeHumidity_2m;
+        public float[]? Apparent_Temperature;
+        public double[]? Precipitation;
+        public int[]? WeatherCode;
+    }
+    
+    public class DailyUnits {
+        public string? Time;
+        public string? WeatherCode;
+        public string? Temperature_2m_Max;
+        public string? Temperature_2m_Min;
+        public string? Sunrise;
+        public string? Sunset;
+        public string? Precipitation_Sum;
+        public string? Precipitation_Hours;
+    }
+    
+    public class DailyData
+    {
+        public string[]? Time;
+        public int[]? WeatherCode;
+        public float[]? Temperature_2m_Max;
+        public float[]? Temperature_2m_Min;
+        public string[]? Sunrise;
+        public string[]? Sunset;
+        public double[]? Precipitation_Sum;
+        public double[]? Precipitation_Hours;
     }
 }

@@ -66,6 +66,7 @@
     align-items: stretch;
     justify-content: space-between;
     align-content: center;
+    min-width: 30vw;
 }
 
 .nav-label {
