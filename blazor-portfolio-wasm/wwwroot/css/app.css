@@ -6,6 +6,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f5ffff;
+    background-image: url('../images/vortex.svg');
+    background-size: cover;
 }
 
 html, body {
@@ -77,6 +79,6 @@ a, .btn-link {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
