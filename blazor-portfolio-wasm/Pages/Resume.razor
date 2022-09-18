@@ -1,6 +1,7 @@
 ﻿@page "/resume"
 <PageTitle>mattopie.com - Résumé</PageTitle>
-<h1>Résumé</h1>
+<h1>Matt Opie</h1>
+<h2>Software Engineer (Florida / Maine)</h2>
 <div class="resume-body">
     <div class="resume-quotes resume-section">
         <div id="recommendations" class="resume-subsection">
@@ -17,7 +18,7 @@
             <div class="divider"></div>
             <p>
                 Experienced Full Stack Software Engineer<br />
-                4 years professional development and software design experience:<br />
+                4+ years professional development and software design experience (3.5 non-internship):<br />
                 Angular, C#/.NET, TypeScript/JavaScript, Python, SQL, HTML (HTML5), CSS3<br />
                 <ul>
                     <li>
@@ -43,9 +44,54 @@
         <div id="resume-skills" class="resume-subsection">
             <h3>Skills</h3>
             <div class="divider"></div>
-            <p>
-
-            </p>
+            <div id="all-skills">
+                <div id="frontend" class="skills-columns">
+                    <ul>
+                        <li>Angular</li>
+                        <li>TypeScript</li>
+                        <li>JavaScript</li>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>.NET Blazor</li>
+                        <li>ReactJS</li>
+                    </ul>
+                </div>
+                <div id="backend" class="skills-columns">
+                    <ul>
+                        <li>C# / .NET</li>
+                        <li>SQL</li>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>C++</li>
+                    </ul>
+                </div>
+                <div id="devops" class="skills-columns">
+                    <ul>
+                        <li>Azure DevOps</li>
+                        <li>AWS (S3 Buckets)</li>
+                        <li>Agile methodologies</li>
+                        <li>Octopus Deploy</li>
+                        <li>Splunk</li>
+                        <li>Datadog</li>
+                        <li>SolarWinds</li>
+                    </ul>
+                </div>
+                <div id="computer-vision-ml" class="skills-columns">
+                    <ul>
+                        <li>OpenCV</li>
+                        <li>MATLAB</li>
+                        <li>Cognex InSight</li>
+                    </ul>
+                </div>
+                <div id="business-skills" class="skills-columns">
+                    <ul>
+                        <li>Tableau</li>
+                        <li>PLC Programming</li>
+                        <li>Linux</li>
+                        <li>Embedded Systems</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="resume-section">
@@ -62,12 +108,12 @@
                         <h6 class="company-name" id="greenshades">
                             <a href="https://go.greenshades.com/" target="_blank">Greenshades Software</a>
                         </h6>
-                        <p class="dates">Nov 2021 - Present</p>
+                        <p class="dates">November 2021 - Present (@($"{Math.Round((decimal)(DateTime.Today - DateTime.Parse("November 1, 2021")).Days / 365.0m, 2):f2}") Years)</p>
                     </div>
                 </div>
                 <div class="job-description">
                     <ul>
-                        <li>Developed and delivered multiple key features for Payroll SaaS web applications using Angular, C#,and SQL.</li>
+                        <li>Developed and delivered multiple key features for Payroll SaaS web applications using Angular, C#, and SQL.</li>
                         <li>Lead performance spikes to improve product reliability and performance using Datadog, SolarWinds,and Splunk, reducing load times by as much as 90%.</li>
                         <li>Drove Greenfield frontend and backend development for primary profit center of the company, crafting SOLID, clean, maintainable, and self-documenting features using Agile methodologies in a CI/CD SDLC environment with 95%+ test code coverage.</li>
                         <li>Crafted, tested, and delivered business logic for retirement catch up codes relied upon by hundreds of employees.</li>
@@ -83,7 +129,8 @@
                         <h6 class="company-name" id="jnj">
                             <a href="https://www.jjvision.com/" target="_blank">Johnson & Johnson Vision</a>
                         </h6>
-                        <p class="dates">May 2018 - November 2021</p>
+                        <p class="dates">May 2018 - November 2021 (@($"{Math.Round((decimal)(DateTime.Parse("November 19, 2021") - DateTime.Parse("May 15, 2018")).Days / 365.0m, 2):f2}") years)</p>
+                        <p class="other-titles">Previous titles: Associate Engineer, Junior Engineer, Engineering Intern</p>
                     </div>
                 </div>
                 <div class="job-description">
@@ -126,7 +173,7 @@
                 </div>
             </div>
             <div class="experience-row">
-                <h5 class="title">Junior Engineer</h5>
+                <h5 class="title">Engineering Technician I</h5>
                 <div class="icon-and-dates">
                     <a href="https://www.androsysinc.com/" target="_blank">
                         <img class="company-icon" src="images/icons/andromeda-systems.jfif" />
@@ -137,45 +184,53 @@
                                 Andromeda Systems, Inc.
                             </a>
                         </h6>
-                        <p class="dates">May 2017 - May 2018</p>
+                        <p class="dates">May 2017 - May 2018 (@($"{Math.Round((decimal)(DateTime.Parse("May 15, 2018") - DateTime.Parse("May 15, 2017")).Days / 365.0m, 2):f2}") years)</p>
+                        <p class="other-titles">Previous titles: Electrical Engineering Intern</p>
                     </div>
                 </div>
                 <div class="job-description">
                     <ul>
-                        <li>Programmed and built multithreaded automated data collection system using Python 3, Linux, Apache, MySQL, and PHP.</li>
-                        <li>Developed REST API in Python 3</li>
-                        <li>Designed frontend administrative console using HTML, CSS, and asynchronous JavaScript (jQuery/jQueryUI/ajax).</li>
-                        <li>Engineered schematic for collection of MODBUS data with Raspberry Pi 3 / Raspberry Pi Zero systems.</li>
+                        <li>
+                            Programmed and built multithreaded automated data collection system using Python 3, Linux, Apache, MySQL, and PHP.
+                        </li>
+                        <li>
+                            Developed REST API in Python 3
+                        </li>
+                        <li>
+                            Designed frontend administrative console using HTML, CSS, and asynchronous JavaScript (jQuery/jQueryUI/ajax).
+                        </li>
+                        <li>
+                            Engineered schematic for collection of MODBUS data with Raspberry Pi 3 / Raspberry Pi Zero systems.
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="resume-section">
-        <div id="resume-education" class="resume-subsection">
+    <div id="resume-education" class="resume-section">
+        <div class="resume-subsection">
             <h3>Education</h3>
             <div class="divider"></div>
-            <p>
-
-            </p>
-        </div>
-    </div>
-    <div class="resume-section">
-        <div id="resume-honors" class="resume-subsection">
-            <h4>Honors & Awards</h4>
-            <div class="divider"></div>
-            <p>
-
-            </p>
-        </div>
-    </div>
-    <div class="resume-section">
-        <div id="resume-organizations" class="resume-subsection">
-            <h4>Organizations</h4>
-            <div class="divider"></div>
-            <p>
-                
-            </p>
+            <div class="experience-row">
+                <h5 class="title">Bachelor of Science, Electrical Engineering</h5>
+                <div class="icon-and-dates">
+                    <a href="https://www.unf.edu/" target="_blank">
+                        <img class="company-icon" src="images/icons/unf.jfif" />
+                    </a>
+                    <div>
+                        <h6 class="company-name" id="unf">
+                            <a href="https://www.unf.edu/" target="_blank">University of North Florida</a>
+                        </h6>
+                        <p class="dates">Graduation: May 2019</p>
+                    </div>
+                </div>
+                <div class="education-description">
+                    <ul>
+                        <li>President of UNF Institute of Electrical and Electronics Engineers (IEEE) Student Branch (2018-2019)</li>
+                        <li>Captain of UNF IEEE Robotics Team (2017-2018)</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

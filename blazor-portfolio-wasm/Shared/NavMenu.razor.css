@@ -10,6 +10,9 @@
 .navbar-brand {
     font-size: 1.1rem;
 }
+.flex-column {
+    min-width: 250px;
+}
 
 .oi {
     width: 2rem;
