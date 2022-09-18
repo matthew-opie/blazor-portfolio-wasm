@@ -193,3 +193,7 @@ span {
     text-shadow: 0.5px 0.5px 1px;
     letter-spacing: 0.05em;
 }
+
+#gs-link:hover{
+    color:greenyellow;
+}
