@@ -9,11 +9,13 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, #032e46 0%, #043d5d 70%);
+    background-image: linear-gradient(180deg, #033e49 0%, #21272e 70%);
 }
 
 .top-row {
-    justify-content: space-around;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -23,18 +25,16 @@ main {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
-        color: white;
     }
 
-        .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-            color: aquamarine;
-            text-shadow: 0px 0px 3px rgba(0, 200, 255, 0.6);
-        }
+    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+        text-decoration: underline;
+    }
 
-        .top-row ::deep a:first-child {
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .top-row ::deep a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
@@ -68,11 +68,11 @@ main {
         z-index: 1;
     }
 
-        .top-row.auth ::deep a:first-child {
-            flex: 1;
-            text-align: right;
-            width: 0;
-        }
+    .top-row.auth ::deep a:first-child {
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
 
     .top-row, article {
         padding-left: 2rem !important;

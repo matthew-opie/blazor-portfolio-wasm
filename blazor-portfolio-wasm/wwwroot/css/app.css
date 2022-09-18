@@ -5,7 +5,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f5ffff;
+    background-color: #033048;
+    background-image: url('../images/surf.svg');
+    background-size: cover;
 }
 
 html, body {

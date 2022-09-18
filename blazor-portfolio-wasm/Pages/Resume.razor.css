@@ -1,0 +1,199 @@
+﻿.resume-body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.resume-section {
+    display: flex;
+    background-color: #FFF;
+    border-radius: 0.5em;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+    box-shadow: 3px 3px 3px #5daca0, -1px -1px 5px rgba(255,255,255,0.2);
+    width: 100%;
+}
+
+#resume-title {
+    color: #fff;
+}
+
+.title, .degree {
+    font-weight: 600;
+}
+
+.job-description, .education-description {
+    margin: 0;
+}
+
+.company-icon, .school-icon {
+    width: 75px;
+    height: 75px;
+    margin: 0.5em 1em 1.5em 0.5em;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -1px -1px 5px rgba(0,0,0,0.2);
+}
+
+.company-icon:hover, .school-icon:hover {
+    width: 78px;
+    height: 78px;
+    margin: 0.3em 1em 1.5em 0.3em;
+}
+
+.company-name, .school-name {
+    text-shadow: 0px 0px 1px;
+}
+
+#jnj a {
+    color: crimson;
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: solid;
+}
+
+    #jnj a:hover {
+        text-decoration: underline;
+    }
+
+#greenshades a {
+    color: forestgreen;
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: solid;
+}
+
+    #greenshades a:hover {
+        text-decoration: underline;
+    }
+
+#andromeda-systems a {
+    color: orangered;
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: solid;
+}
+
+    #andromeda-systems a:hover {
+        text-decoration: underline;
+    }
+
+#unf a {
+    color: #223a53;
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: solid;
+}
+
+    #unf:hover {
+        text-decoration: underline;
+    }
+
+.icon-and-dates {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    margin: 0.5em 0.5em -0.5em 0.5em;
+}
+
+#quote-text {
+    color: #081a26;
+    opacity: 0.8;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+#quote-attribution {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.resume-subsection {
+    margin: 10px 10px 10px 10px;
+    width: 100%;
+}
+
+.divider {
+    margin-top: -2px;
+    margin-bottom: 5px;
+    display: absolute;
+    height: 2px;
+    min-width: 90%;
+    width: 100%;
+    background-color: dodgerblue;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+h1, h2, h3, h4, h5 {
+    text-shadow: 1px 1.5px 4px rgba(2, 190, 206, 0.2);
+}
+
+li::first-letter {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: rgb(2,95,153);
+    letter-spacing: 0.5px;
+}
+
+li:hover {
+    color: black;
+    font-weight: 600;
+}
+li::marker {
+    color: rgba(0,75,88,0.9);
+}
+
+.other-titles {
+    color: slategrey;
+    margin-top: -0.75em;
+}
+
+.other-titles:hover {
+    color: black;
+    font-weight: 600;
+}
+
+#resume-education {
+    margin-bottom: 3em;
+}
+
+#all-skills {
+    display: flex;
+    flex: auto;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+span {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+@media (min-width:641px) {
+    #all-skills {
+        flex-direction: row;
+    }
+}
+
+.skill-section-title {
+    font-weight: 800;
+    border-bottom: solid 1px #a9a9a9;
+}
+
+.skill-section-title > h5 {
+    text-align: center;
+    margin-bottom: 0.1em;
+}
+
+#gs-link{
+    color: darkgreen;
+    text-decoration: none;
+    text-shadow: 0.5px 0.5px 1px;
+    letter-spacing: 0.05em;
+}
+
+#gs-link:hover{
+    color:greenyellow;
+}

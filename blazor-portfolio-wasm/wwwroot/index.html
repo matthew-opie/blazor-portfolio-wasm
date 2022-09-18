@@ -13,8 +13,12 @@
 </head>
 
 <body>
-    <div id="app"></div>
-    <div id="loading">Loading...</div>
+    <div id="app">
+        <div style="position:absolute; top:30vh; width:100%; text-align:center">
+            <div id="loading">Loading...</div>
+            <div class="spinner-border" role="status"></div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -22,6 +26,6 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    
 </body>
-
 </html>
