@@ -6,12 +6,15 @@
 
 .resume-section {
     display: flex;
-    background-color: whitesmoke;
+    background-color: #FFF;
     border-radius: 0.5em;
     margin: 0.5em 0.5em 0.5em 0.5em;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -1px -1px 5px rgba(0,0,0,0.2);
-    opacity: 0.9;
+    box-shadow: 3px 3px 3px #5daca0, -1px -1px 5px rgba(255,255,255,0.2);
     width: 100%;
+}
+
+#resume-title {
+    color: #fff;
 }
 
 .title, .degree {
@@ -41,7 +44,7 @@
 
 #jnj a {
     color: crimson;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     text-decoration: solid;
 }
@@ -52,7 +55,7 @@
 
 #greenshades a {
     color: forestgreen;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     text-decoration: solid;
 }
@@ -63,7 +66,7 @@
 
 #andromeda-systems a {
     color: orangered;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     text-decoration: solid;
 }
@@ -74,7 +77,7 @@
 
 #unf a {
     color: #223a53;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     text-decoration: solid;
 }
@@ -159,10 +162,34 @@ li::marker {
     display: flex;
     flex: auto;
     justify-content: space-around;
+    flex-direction: column;
 }
 
 span {
     justify-content: center;
     align-content: center;
     align-items: center;
+}
+
+@media (min-width:641px) {
+    #all-skills {
+        flex-direction: row;
+    }
+}
+
+.skill-section-title {
+    font-weight: 800;
+    border-bottom: solid 1px #a9a9a9;
+}
+
+.skill-section-title > h5 {
+    text-align: center;
+    margin-bottom: 0.1em;
+}
+
+#gs-link{
+    color: darkgreen;
+    text-decoration: none;
+    text-shadow: 0.5px 0.5px 1px;
+    letter-spacing: 0.05em;
 }

@@ -13,15 +13,21 @@ html {
 .icon {
     margin-right: 0.3em;
 }
+
 i {
     margin-left: 0.3em;
     margin-right: 0.3em;
 }
+
 h1 {
     border-bottom: 3px solid #00314e;
     font-size: calc(0.1em + 4vh);
     transition: all 0.25s linear;
     position: relative;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 12px;
+    margin-left: 12px;
 }
 
     h1:before {
@@ -44,10 +50,10 @@ h1 {
 
 
 
-.quick-links{
+.quick-links {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -57,23 +63,19 @@ h1 {
     border-radius: 0.5em;
     margin: 0.5em 0.5em 1.5em 0.5em;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -1px -1px 5px rgba(0,0,0,0.2);
-    opacity: 0.8;
     min-width: 35vw;
     min-height: 15vh;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
 }
 
 .sections {
-
 }
 
 #resume-link {
-
 }
 
 #portfolio-link {
-
 }
 
 #blog-link {
@@ -83,5 +85,47 @@ h1 {
 a {
     color: black;
     text-decoration: none;
-    
+}
+
+h3 {
+    border-bottom: 1px dashed black;
+}
+
+#summary-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+}
+
+
+#business-card {
+    height: 20vh;
+    width: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-radius: 20px;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    box-shadow: 3px 3px 10px;
+}
+
+.headshot {
+    width: 100%;
+    border-radius: 20px;
+}
+
+#bio {
+    justify-content: center;
+    display:flex;
+    flex-direction:row;
+}
+
+#bio-info {
+    margin-left: 1.5em;
+    width: 40%;
+    justify-content: space-around;
+    margin-top: 1em;
 }
