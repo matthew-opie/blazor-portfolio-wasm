@@ -32,11 +32,11 @@
     box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -1px -1px 5px rgba(0,0,0,0.2);
 }
 
-.company-icon:hover, .school-icon:hover {
-    width: 78px;
-    height: 78px;
-    margin: 0.3em 1em 1.5em 0.3em;
-}
+    .company-icon:hover, .school-icon:hover {
+        width: 78px;
+        height: 78px;
+        margin: 0.3em 1em 1.5em 0.3em;
+    }
 
 .company-name, .school-name {
     text-shadow: 0px 0px 1px;
@@ -82,9 +82,9 @@
     text-decoration: solid;
 }
 
-    #unf:hover {
-        text-decoration: underline;
-    }
+#unf:hover {
+    text-decoration: underline;
+}
 
 .icon-and-dates {
     display: flex;
@@ -139,7 +139,9 @@ li::first-letter {
 li:hover {
     color: black;
     font-weight: 600;
+    cursor: default;
 }
+
 li::marker {
     color: rgba(0,75,88,0.9);
 }
@@ -149,10 +151,10 @@ li::marker {
     margin-top: -0.75em;
 }
 
-.other-titles:hover {
-    color: black;
-    font-weight: 600;
-}
+    .other-titles:hover {
+        color: black;
+        font-weight: 600;
+    }
 
 #resume-education {
     margin-bottom: 3em;
@@ -182,18 +184,18 @@ span {
     border-bottom: solid 1px #a9a9a9;
 }
 
-.skill-section-title > h5 {
-    text-align: center;
-    margin-bottom: 0.1em;
-}
+    .skill-section-title > h5 {
+        text-align: center;
+        margin-bottom: 0.1em;
+    }
 
-#gs-link{
+#gs-link {
     color: darkgreen;
     text-decoration: none;
     text-shadow: 0.5px 0.5px 1px;
     letter-spacing: 0.05em;
 }
 
-#gs-link:hover{
-    color:greenyellow;
-}
+    #gs-link:hover {
+        color: greenyellow;
+    }

@@ -62,7 +62,7 @@ h1 {
     background-color: #FFF;
     border-radius: 0.5em;
     margin: 0.5em 0.5em 1.5em 0.5em;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -1px -1px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 4px rgb(31, 230, 64, 0.8), -1px -1px 5px rgba(0,0,0,0.2);
     min-width: 35vw;
     min-height: 15vh;
     justify-content: center;
@@ -113,8 +113,10 @@ h3 {
 }
 
 .headshot {
-    width: 100%;
+    width: 103%;
+    border: 3px solid black;
     border-radius: 20px;
+    margin: 0;
 }
 
 #bio {

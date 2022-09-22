@@ -1,9 +1,40 @@
 ﻿@page "/portfolio"
 
 <PageTitle>mattopie.com - Portfolio</PageTitle>
+<div class="headers">
+    <h1>Matt Opie - Portfolio</h1>
+</div>
 
-<h1>Portfolio</h1>
+<div class="project-container card">
+    <div class="project-title">
+        <div><a class="project-link" href="/" target="_blank"><h4>mattopie.com</h4></a><a class="git-link" href="https://www.github.com/matthew-opie/blazor-portfolio-wasm/" target="_blank"><i class="fa-brands fa-github"></i>Github</a></div>
+        <img class="project-image" src="/images/website-screenshot.png" />
+    </div>
 
-<h2>Under construction...
-    Check back soon!
-</h2>
+    <div class="project-description">
+        <p>A personal website built for experimenting with new ideas.</p>
+        <p>
+            I chose to use .NET Blazor as development framework because I was interested in using C# for my code-behind instead of a JavaScript variant. I wanted a strongly-typed system with the familiarity of C#.
+            I used Github Actions to automatically deploy my static website to AWS S3 every time I created an update to the master branch to simplify my deployment process.
+            I used Cloudflare for their free-tier caching and DNS services.
+        </p>
+        @*<p>CockroachDB for a free SQL Server backend.</p>*@
+        @*<p>Finally, I use Azure microservices to host my API, to serve my website and act as a middle-man for interacting with CockroachDB.</p>*@
+    </div>
+    <div class="project-tags">
+        <div class="tags-label">
+            <p>Technologies used:</p>
+            <ul class="tag-group">
+                <li class="tag">.NET Blazor</li>
+                <li class="tag">HTML5</li>
+                <li class="tag">CSS3</li>
+                <li class="tag">AWS S3 Buckets</li>
+                <li class="tag">Github Actions</li>
+                <li class="tag">Cloudflare DNS</li>
+                @*<li class="tag">CockroachDB</li>
+                <li class="tag">Azure WebAPI</li>*@
+            </ul>
+        </div>
+
+    </div>
+</div>
