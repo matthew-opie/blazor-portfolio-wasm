@@ -1,4 +1,5 @@
 ﻿@page "/pomodoro"
+@using CurrieTechnologies.Razor.Vibration
 @inject VibrationService vibrationService
 <PageTitle>@Title</PageTitle>
 
@@ -45,7 +46,6 @@
         TimerState.Alarm => "Time's up!",
         _ => "mattopie.com"
     };
-
     public int TimeRemaining { get; set; } = TIME_TOTAL_SECONDS;
     public string TimeString { get; set; } = "25:00";
     public const int TIME_TOTAL_SECONDS = 1500;
@@ -71,7 +71,6 @@
             if (TimeRemaining == 0)
             {
                 TriggerAlarm();
-                StateHasChanged();
             }
         }
     }
@@ -113,9 +112,13 @@
     public async void TriggerAlarm()
     {
         State = TimerState.Alarm;
-        while (State == TimerState.Alarm)
+        StateHasChanged();
+        await vibrationService.VibrateAsync(new int[] { 300, 200, 300, 200, 300, 200, 300, 200, 300 });
+
+        if (State == TimerState.Alarm)
         {
-            await vibrationService.VibrateAsync(new int[] { 300, 200 });
+            await Task.Delay(3000);
+            TriggerAlarm();
         }
     }
 
