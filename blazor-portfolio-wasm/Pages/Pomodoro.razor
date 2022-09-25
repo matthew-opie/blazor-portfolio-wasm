@@ -1,17 +1,18 @@
 ﻿@page "/pomodoro"
+@inject VibrationService vibrationService
 <PageTitle>@Title</PageTitle>
 
 <div id="pomodoro" class="card">
     <h3>Pomodoro Timer</h3>
 
     <div class="timer-type-buttons">
-        <button @onclick="Reset" class="pomodoro-button neumorph">
+        <button @onclick="Reset" class="neumorph">
             Pomodoro
         </button>
-        <button @onclick="ShortBreak" class="shortbreak-button neumorph">
+        <button @onclick="ShortBreak" class="neumorph">
             Short Break
         </button>
-        <button @onclick="LongBreak" class="longbreak-button neumorph">
+        <button @onclick="LongBreak" class="neumorph" s>
             Long Break
         </button>
     </div>
@@ -19,13 +20,13 @@
     <div class="time-display">@TimeString</div>
 
     <div class="action-buttons">
-        <button @onclick="Start" class="start-button neumorph">
+        <button @onclick="Start" class="neumorph">
             Start
         </button>
-        <button @onclick="Stop" class="stop-button neumorph">
+        <button @onclick="Stop" class="neumorph">
             Stop
         </button>
-        <button @onclick="Reset" class="reset-button neumorph">
+        <button @onclick="Reset" class="neumorph">
             Reset
         </button>
     </div>
@@ -50,7 +51,6 @@
     public const int TIME_TOTAL_SECONDS = 1500;
     public const int TIME_SHORTBREAK_SECONDS = 300;
     public const int TIME_LONGBREAK_SECONDS = 900;
-    public const int DEBUG = 10;
     public List<string> CompletedTasks { get; set; } = new List<string>();
     public string CurrentTask { get; set; } = string.Empty;
     public List<string> ActiveTasks { get; set; } = new List<string>();
@@ -70,7 +70,7 @@
 
             if (TimeRemaining == 0)
             {
-                State = TimerState.Alarm;
+                TriggerAlarm();
                 StateHasChanged();
             }
         }
@@ -108,6 +108,15 @@
     public void UpdateTimestring()
     {
         TimeString = $"{Math.Floor(TimeRemaining / 60.0f)}:{TimeRemaining % 60:D2}";
+    }
+
+    public async void TriggerAlarm()
+    {
+        State = TimerState.Alarm;
+        while (State == TimerState.Alarm)
+        {
+            await vibrationService.VibrateAsync(new int[] { 300, 200 });
+        }
     }
 
     public enum TimerState
