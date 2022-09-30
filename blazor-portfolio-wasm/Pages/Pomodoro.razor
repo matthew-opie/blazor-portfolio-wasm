@@ -1,6 +1,7 @@
 ﻿@page "/pomodoro"
-@using CurrieTechnologies.Razor.Vibration
-@inject VibrationService vibrationService
+@inject IHtmlNotificationService _notificationService
+@implements IAsyncDisposable
+@inject IJSRuntime js
 <PageTitle>@Title</PageTitle>
 
 <div id="pomodoro" class="card">
@@ -36,6 +37,13 @@
 
 
 @code {
+    //HTML5 Notifications:
+    private string _notificationTitle = "Alarm";
+    private string _notificationBody = "Time's up!";
+    private string _notificationIcon = "./images/icons/clock-red.png";
+    private bool _notificationSupported;
+    private HtmlNotificationPermissionTypes _htmlNotificationPermission;
+
     public string Title => State switch
     {
         TimerState.Init => "mattopie.com - Pomodoro Timer",
@@ -48,13 +56,33 @@
     };
     public int TimeRemaining { get; set; } = TIME_TOTAL_SECONDS;
     public string TimeString { get; set; } = "25:00";
-    public const int TIME_TOTAL_SECONDS = 1500;
+    public const int TIME_TOTAL_SECONDS = 10;
     public const int TIME_SHORTBREAK_SECONDS = 300;
     public const int TIME_LONGBREAK_SECONDS = 900;
     public List<string> CompletedTasks { get; set; } = new List<string>();
     public string CurrentTask { get; set; } = string.Empty;
     public List<string> ActiveTasks { get; set; } = new List<string>();
     public TimerState State { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _notificationSupported = await _notificationService.IsBrowserSupportedAsync();
+            if ( _notificationSupported )
+            {
+                await _notificationService.RequestPermissionAsync(async res =>
+                {
+                    _htmlNotificationPermission = res;
+                    StateHasChanged();
+                });    
+            }
+            else
+            {
+                StateHasChanged();
+            }
+        }
+    }
 
     public async void Run()
     {
@@ -113,12 +141,27 @@
     {
         State = TimerState.Alarm;
         StateHasChanged();
-        await vibrationService.VibrateAsync(new int[] { 300, 200, 300, 200, 300, 200, 300, 200, 300 });
+        await ShowAlarmNotification();
+    }
 
-        if (State == TimerState.Alarm)
+    private async Task ShowAlarmNotification()
+    {
+        var options = new HtmlNotificationOptions(_notificationTitle)
+            {
+                Body = _notificationBody,
+                Icon = _notificationIcon,
+                Vibrate = new int[] { 100, 200, 100 },
+                Data = ".."
+            };
+
+        var id = await _notificationService.ShowsAsync(options);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_notificationService is not null)
         {
-            await Task.Delay(3000);
-            TriggerAlarm();
+            await _notificationService.DisposeAsync();
         }
     }
 
