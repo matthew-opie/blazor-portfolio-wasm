@@ -49,6 +49,7 @@ i {
 }
 
 .card {
+    z-index: 5;
     display: flex;
     background-color: #FFF;
     border-radius: 0.5em;

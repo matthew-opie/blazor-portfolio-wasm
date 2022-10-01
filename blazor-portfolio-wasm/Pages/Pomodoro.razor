@@ -1,0 +1,177 @@
+﻿@page "/pomodoro"
+@inject IHtmlNotificationService _notificationService
+@implements IAsyncDisposable
+
+<PageTitle>@Title</PageTitle>
+
+<div id="pomodoro" class="card">
+    <h3>Pomodoro Timer</h3>
+
+    <div class="timer-type-buttons">
+        <button @onclick="Reset" class="neumorph">
+            Pomodoro
+        </button>
+        <button @onclick="ShortBreak" class="neumorph">
+            Short Break
+        </button>
+        <button @onclick="LongBreak" class="neumorph">
+            Long Break
+        </button>
+    </div>
+
+    <div class="time-display">@TimeString</div>
+
+    <div class="action-buttons">
+        <button @onclick="Start" class="neumorph">
+            Start
+        </button>
+        <button @onclick="Stop" class="neumorph">
+            Stop
+        </button>
+        <button @onclick="Reset" class="neumorph">
+            Reset
+        </button>
+    </div>
+
+</div>
+
+
+@code {
+    //HTML5 Notifications:
+    private string _notificationTitle = "Alarm";
+    private string _notificationBody = "Time's up!";
+    private string _notificationIcon = "./images/icons/clock-red.png";
+    private bool _notificationSupported;
+    private HtmlNotificationPermissionTypes _htmlNotificationPermission;
+
+    public string Title => State switch
+    {
+        TimerState.Init => "mattopie.com - Tomato Timer",
+        TimerState.Running => $"Timer - {TimeString}",
+        TimerState.Stopped => TimeRemaining > 0
+                            ? $"Timer - {TimeString} (Stopped)"
+                            : "mattopie.com - Tomato Timer",
+        TimerState.Alarm => "Time's up!",
+        _ => "mattopie.com"
+    };
+
+    public int TimeRemaining { get; set; } = TIME_TOTAL_SECONDS;
+    public string TimeString { get; set; } = "25:00";
+    public const int TIME_TOTAL_SECONDS = 1500;
+    public const int TIME_SHORTBREAK_SECONDS = 300;
+    public const int TIME_LONGBREAK_SECONDS = 900;
+    public List<string> CompletedTasks { get; set; } = new List<string>();
+    public string CurrentTask { get; set; } = string.Empty;
+    public List<string> ActiveTasks { get; set; } = new List<string>();
+    public TimerState State { get; set; } = TimerState.Init;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _notificationSupported = await _notificationService.IsBrowserSupportedAsync();
+            if ( _notificationSupported )
+            {
+                await _notificationService.RequestPermissionAsync(async res =>
+                {
+                    _htmlNotificationPermission = res;
+                    StateHasChanged();
+                });    
+            }
+            else
+            {
+                StateHasChanged();
+            }
+        }
+    }
+
+    public async void Run()
+    {
+        while (TimeRemaining > 0 && State == TimerState.Running)
+        {
+            TimeRemaining--;
+            await Task.Delay(1000);
+            if (State == TimerState.Running)
+            {
+                UpdateTimestring();
+                StateHasChanged();
+            }
+
+            if (TimeRemaining == 0)
+            {
+                TriggerAlarm();
+            }
+        }
+    }
+
+    public void Start()
+    {
+        State = TimerState.Running;
+        Run();
+    }
+
+    public void Stop() => State = TimerState.Stopped;
+
+    public void Reset()
+    {
+        State = TimerState.Init;
+        TimeRemaining = TIME_TOTAL_SECONDS;
+
+        UpdateTimestring();
+    }
+
+    public void ShortBreak()
+    {
+        State = TimerState.Init;
+        TimeRemaining = TIME_SHORTBREAK_SECONDS;
+        UpdateTimestring();
+    }
+
+    public void LongBreak()
+    {
+        State = TimerState.Init;
+        TimeRemaining = TIME_LONGBREAK_SECONDS;
+        UpdateTimestring();
+    }
+
+    public void UpdateTimestring()
+    {
+        TimeString = $"{Math.Floor(TimeRemaining / 60.0f)}:{TimeRemaining % 60:D2}";
+    }
+
+    public async void TriggerAlarm()
+    {
+        State = TimerState.Alarm;
+        StateHasChanged();
+        await ShowAlarmNotification();
+    }
+
+    private async Task ShowAlarmNotification()
+    {
+        var options = new HtmlNotificationOptions(_notificationTitle)
+            {
+                Body = _notificationBody,
+                Icon = _notificationIcon,
+                Vibrate = new int[] { 100, 200, 100 }
+            };
+
+        var id = await _notificationService.ShowsAsync(options);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_notificationService is not null)
+        {
+            await _notificationService.DisposeAsync();
+            Stop();
+        }
+    }
+
+    public enum TimerState
+    {
+        Init,
+        Stopped,
+        Running,
+        Alarm
+    }    
+}
