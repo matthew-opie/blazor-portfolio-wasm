@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+#contextBar {
+    transition: top 1.5s;
+}
+
 main {
     flex: 1;
 }
@@ -13,6 +17,7 @@ main {
 }
 
 .top-row {
+    z-index: -1;
     justify-content: space-around;
     height: 3.5rem;
     display: flex;

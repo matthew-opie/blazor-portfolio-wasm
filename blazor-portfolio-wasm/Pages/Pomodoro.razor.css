@@ -7,6 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 3;
 }
 
 .timer-type-buttons, .action-buttons {

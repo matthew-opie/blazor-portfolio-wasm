@@ -1,7 +1,7 @@
 ﻿@page "/pomodoro"
 @inject IHtmlNotificationService _notificationService
 @implements IAsyncDisposable
-@inject IJSRuntime js
+
 <PageTitle>@Title</PageTitle>
 
 <div id="pomodoro" class="card">
@@ -14,7 +14,7 @@
         <button @onclick="ShortBreak" class="neumorph">
             Short Break
         </button>
-        <button @onclick="LongBreak" class="neumorph" s>
+        <button @onclick="LongBreak" class="neumorph">
             Long Break
         </button>
     </div>
@@ -46,23 +46,24 @@
 
     public string Title => State switch
     {
-        TimerState.Init => "mattopie.com - Pomodoro Timer",
+        TimerState.Init => "mattopie.com - Tomato Timer",
         TimerState.Running => $"Timer - {TimeString}",
         TimerState.Stopped => TimeRemaining > 0
                             ? $"Timer - {TimeString} (Stopped)"
-                            : "mattopie.com - Pomodoro Timer",
+                            : "mattopie.com - Tomato Timer",
         TimerState.Alarm => "Time's up!",
         _ => "mattopie.com"
     };
+
     public int TimeRemaining { get; set; } = TIME_TOTAL_SECONDS;
     public string TimeString { get; set; } = "25:00";
-    public const int TIME_TOTAL_SECONDS = 10;
+    public const int TIME_TOTAL_SECONDS = 1500;
     public const int TIME_SHORTBREAK_SECONDS = 300;
     public const int TIME_LONGBREAK_SECONDS = 900;
     public List<string> CompletedTasks { get; set; } = new List<string>();
     public string CurrentTask { get; set; } = string.Empty;
     public List<string> ActiveTasks { get; set; } = new List<string>();
-    public TimerState State { get; set; }
+    public TimerState State { get; set; } = TimerState.Init;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -88,10 +89,10 @@
     {
         while (TimeRemaining > 0 && State == TimerState.Running)
         {
+            TimeRemaining--;
             await Task.Delay(1000);
             if (State == TimerState.Running)
             {
-                TimeRemaining--;
                 UpdateTimestring();
                 StateHasChanged();
             }
@@ -115,6 +116,7 @@
     {
         State = TimerState.Init;
         TimeRemaining = TIME_TOTAL_SECONDS;
+
         UpdateTimestring();
     }
 
@@ -150,8 +152,7 @@
             {
                 Body = _notificationBody,
                 Icon = _notificationIcon,
-                Vibrate = new int[] { 100, 200, 100 },
-                Data = ".."
+                Vibrate = new int[] { 100, 200, 100 }
             };
 
         var id = await _notificationService.ShowsAsync(options);
@@ -162,6 +163,7 @@
         if (_notificationService is not null)
         {
             await _notificationService.DisposeAsync();
+            Stop();
         }
     }
 
@@ -171,5 +173,5 @@
         Stopped,
         Running,
         Alarm
-    }
+    }    
 }
